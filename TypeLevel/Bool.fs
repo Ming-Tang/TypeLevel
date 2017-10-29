@@ -22,6 +22,10 @@ module Bool =
     static member inline (<|-) (If0(c, p), v) =
       ((c <|- v) <?> (p, Id)) <|- v
 
+  type ToBool = ToBool with
+    interface Func
+    static member inline (<|-) (ToBool, x) = !? x
+
   type Not = Not with
     interface Func
     static member inline (<|-) (Not, True) = False

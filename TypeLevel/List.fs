@@ -47,3 +47,18 @@ module List =
   type Fold<'f, 'x0> = Fold of 'f * 'x0 with
     interface Func
     static member inline (<|-) (Fold(f, x0), xs) = (f, x0) <|/- xs
+
+  type L1<'a> = C<'a, E>
+  type L2<'a, 'b> = C<'a, C<'b, E>>
+  type L3<'a, 'b, 'c> = C<'a, C<'b, C<'c, E>>>
+  type L4<'a, 'b, 'c, 'd> = C<'a, C<'b, C<'c, C<'d, E>>>>
+  type L5<'a, 'b, 'c, 'd, 'e> = C<'a, C<'b, C<'c, C<'d, C<'e, E>>>>>
+  type L6<'a, 'b, 'c, 'd, 'e, 'f> = C<'a, C<'b, C<'c, C<'d, C<'e, C<'f, E>>>>>>
+
+  let inline L1(a) : L1<'a> = C(a, E)
+  let inline L2(a, b) : L2<'a, 'b> = C(a, C(b, E))
+  let inline L3(a, b, c) : L3<'a, 'b, 'c> = C(a, C(b, C(c, E)))
+  let inline L4(a, b, c, d) : L4<'a, 'b, 'c, 'd> = C(a, C(b, C(c, C(d, E))))
+  let inline L5(a, b, c, d, e) : L5<'a, 'b, 'c, 'd, 'e> = C(a, C(b, C(c, C(d, C(e, E)))))
+  let inline L6(a, b, c, d, e, f) : L6<'a, 'b, 'c, 'd, 'e, 'f> = C(a, C(b, C(c, C(d, C(e, C(f, E))))))
+

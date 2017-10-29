@@ -24,9 +24,6 @@ module Base10 =
     static member inline (+) (a : N5d<_, _, _, _, _>, b) =
       snd (a +. b)
 
-    //static member inline (-) (a : N5d<_, _, _, _, _>, b : N5d<_, _, _, _, _>) =
-    //  !!!(a + (!!! b))
-
     static member inline (*) (N5d(a5, a4, a3, a2, a1), b) =
       let b1 = b
       let b2 = !<<< b
@@ -44,10 +41,16 @@ module Base10 =
     static member inline (!!!) (N5d(a5, a4, a3, a2, a1)) : N5d<_, _, _, _, _> =
       N5d(!! a5, !! a4, !! a3, !! a2, !! a1)
 
+    static member inline (-) (a, b) = !!!((!!! a) + b)
+
+    //static member inline (!++) a = a + N5d(D0, D0, D0, D0, D1)
+    //static member inline (!--) a = a - N5d(D0, D0, D0, D0, D1)
+
+#if false
   let seven = D3 + D4
   let testAdd = N5d(D0, D0, D4, D1, D2) + N5d(D0, D0, D3, D2, D4)
   let testAdd' = N5d(D0, D0, D3, D2, D4) + N5d(D0, D0, D4, D1, D2)
-  let testComp = !!! N5d(D0, D2, D1, D8, D5)
+  //let testComp = !!! N5d(D0, D2, D1, D8, D5)
   //let testSub = N5d(D0, D2, D3, D2, D4) - N5d(D0, D0, D4, D1, D3)
 
   let testAdd1 = N5d(D0, D0, D3, D4, D2) + (N5d(D0, D0, D3, D2, D4) + N5d(D0, D0, D4, D1, D2))
@@ -64,4 +67,4 @@ module Base10 =
   let testMultA = (a * b) * c
   let testMultA' = a * (b * c)
   let testMult11 = N5d(D0, D0, D0, D1, D1) * N5d(D0, D0, D0, D1, D1)
-
+#endif

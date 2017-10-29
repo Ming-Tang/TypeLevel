@@ -18,6 +18,10 @@ module Nat =
     static member inline (<<=) (Z, x) = True
     static member inline (===) (Z, Z) = True
     static member inline ( <|*- ) (Z, (f, x)) = x
+    static member inline (!++) Z = (S Z)
+    static member inline (!--) Z = Z
+
+    static member inline (!?) Z = False
 
   type S<'a> with
     static member Zero = Z
@@ -40,27 +44,54 @@ module Nat =
 
     static member inline (<|*-) (S n, (f, x)) = n <|*- (f, f <|- x)
 
-  let N0 = Z
-  let N1 = S N0
-  let N2 = S N1
-  let N3 = S N2
-  let N4 = S N3
-  let N5 = S N4
-  let N6 = S N5
-  let N7 = S N6
-  let N8 = S N7
-  let N9 = S N8
-  let N10 = S N9
-  let N11 = S N10
-  let N12 = S N11
-  let N13 = S N12
-  let N14 = S N13
-  let N15 = S N14
-  let N16 = S N15
-  let N17 = S N16
-  let N18 = S N17
-  let N19 = S N18
-  let N20 = S N19
+    static member inline (!++) x = S x
+    static member inline (!--) (S x) = x
+
+    static member inline (!?) (S _) = True
+
+  type N0 = Z
+  type N1 = S<N0>
+  type N2 = S<N1>
+  type N3 = S<N2>
+  type N4 = S<N3>
+  type N5 = S<N4>
+  type N6 = S<N5>
+  type N7 = S<N6>
+  type N8 = S<N7>
+  type N9 = S<N8>
+  type N10 = S<N9>
+  type N11 = S<N10>
+  type N12 = S<N11>
+  type N13 = S<N12>
+  type N14 = S<N13>
+  type N15 = S<N14>
+  type N16 = S<N15>
+  type N17 = S<N16>
+  type N18 = S<N17>
+  type N19 = S<N18>
+  type N20 = S<N19>
+
+  let N0 : N0 = Z
+  let N1 : N1 = S N0
+  let N2 : N2 = S N1
+  let N3 : N3 = S N2
+  let N4 : N4 = S N3
+  let N5 : N5 = S N4
+  let N6 : N6 = S N5
+  let N7 : N7 = S N6
+  let N8 : N8 = S N7
+  let N9 : N9 = S N8
+  let N10 : N10 = S N9
+  let N11 : N11 = S N10
+  let N12 : N12 = S N11
+  let N13 : N13 = S N12
+  let N14 : N14 = S N13
+  let N15 : N15 = S N14
+  let N16 : N16 = S N15
+  let N17 : N17 = S N16
+  let N18 : N18 = S N17
+  let N19 : N19 = S N18
+  let N20 : N20 = S N19
 
   type Pred = Pred with
     interface Func
@@ -94,7 +125,6 @@ module Nat =
     interface Func
     static member inline (<|-) (Repeat f, (n, x)) =
       n <|*- (f, x)
-      //n <***> RepHelper(f, x)
 
   type Add = Add with
     interface Func

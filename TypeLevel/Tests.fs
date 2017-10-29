@@ -1,6 +1,11 @@
 ﻿namespace TypeLevel.Tests
 open TypeLevel
 
+module Test =
+  let testBool1 : True = !? N3
+  let testBool0 : False = !? N0
+
+#if false
 module TestList =
   open TypeLevel
   let list1 = C(N2, C(N3, C(N4, E)))
@@ -16,6 +21,10 @@ module TestList =
 
 module TestNat =
   open TypeLevel
+  let p1 : Z = !-- Z
+  let p2 : S<Z> = !-- (S (S Z))
+  let p3 : S<S<Z>> = !++ (S Z)
+
   let res = (S (S Z)) -|> Pred
   let res1 = (S (S Z)) -|> Comp(Pred, Pred)
   let res2 = S (S Z) -|> Comp(Fst, Fork2(Comp(Pred, Pred), Pred))
@@ -56,3 +65,16 @@ module TestNat =
 
   //let testFactorial1 = N4 <|*- ((Fst >-> Pred) <*> Mult, (N4, N1))
   let testX = N8 <|*- ((Fst >-> Pred) <*> Add, (N8, N1))
+#endif
+
+module TestTape =
+  let singleton = Tape(E, Z, E)
+
+  let shlSingleton = !<<< singleton
+  let shrSingleton = !>>> singleton
+
+  let tape1 = Tape(C(N2, C(N1, C(Z, E))), N3, C(N4, C(N5, C(N6, E))))
+
+  let shlTape1 = !<<< tape1
+  let shrTape1 = !>>> tape1
+

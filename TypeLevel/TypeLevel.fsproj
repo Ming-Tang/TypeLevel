@@ -50,6 +50,8 @@
     <Compile Include="Bool.fs" />
     <Compile Include="Nat.fs" />
     <Compile Include="List.fs" />
+    <Compile Include="Tape.fs" />
+    <Compile Include="Comp.fs" />
     <Compile Include="Base10.Digits.fs" />
     <Compile Include="Base10.fs" />
     <Compile Include="Tests.fs" />
